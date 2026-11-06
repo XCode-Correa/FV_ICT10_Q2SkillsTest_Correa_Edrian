@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pyscript.net/releases/2026.7.3/core.css" />
+    <script type="module" src="https://pyscript.net/releases/2026.7.3/core.js"></script>
+    
+    <title>ICT 10</title>
+    
+    <style>
+        body{text-align: center;}
+        h1{color: rgb(4, 50, 136);}
+        #output1{border: 5px solid rgb(17, 20, 193);box-shadow: 0px 5px 5px rgb(200, 200, 200); height: 500px;border-radius: 10px;font-size: 20px;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Planet Information</h1>
+        <p>Enter a planet code to search</p>
+
+        <input type="text" id="planet1" placeholder="Example: Earth">
+    </div>
+        <br>
+
+        <button py-click="search_planet">Search Planet</button>
+
+        <div class="result"></div>
+        <h3>Search Result</h3>
+        <p><b>Planet code: <span id="code"> </span></b></p>
+        <p><b>Planet name: <span id="name"> </span></b></p>
+        <p><b>Order from the Sun: <span id="order"> </span></b></p>
+        <p><b>Number of moons: <span id="moons"> </span></b></p>
+
+        <script type="py" src="main.py"></script>
+</body>
+</html>
