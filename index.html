@@ -3,35 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="icon" type="image/png" href="EXAC.png">
+
     <link rel="stylesheet" href="https://pyscript.net/releases/2026.7.3/core.css" />
     <script type="module" src="https://pyscript.net/releases/2026.7.3/core.js"></script>
-    
-    <title>ICT 10</title>
-    
+
+    <title>Skills Test - Element Checker</title>
+
     <style>
-        body{text-align: center;}
-        h1{color: rgb(4, 50, 136);}
-        #output1{border: 5px solid rgb(17, 20, 193);box-shadow: 0px 5px 5px rgb(200, 200, 200); height: 500px;border-radius: 10px;font-size: 20px;}
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #e4e4e7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px 20px 60px 20px;
+            position: relative;
+        }
+
+        .container {
+            background: #ffffff;
+            border: 1px solid #27272a;
+            border-radius: 12px;
+            padding: 40px 30px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        .logo-wrapper {
+            margin-bottom: 20px;
+        }
+
+        .logo-img {
+            width: 64px;
+            height: 64px;
+            object-fit: contain;
+            border-radius: 12px;
+            border: 1px solid #3f3f46;
+            padding: 4px;
+            background: #202024;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            letter-spacing: 1.5px;
+            color: #1e1d1d;
+            margin-bottom: 6px;
+            font-weight: 700;
+        }
+
+        p {
+            font-size: 0.85rem;
+            color: #a1a1aa;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+        }
+        h3 {
+            font-size: 0.95rem;
+            color: #74747c;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .element_input {
+            width: 100%;
+            padding: 12px 16px;
+            background-color: #fdfdff;
+            border: 1px solid #f0f0f0;
+            border-radius: 8px;
+            color: #4c4b4b;
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .element_input:focus {
+            border-color: #000000;
+            box-shadow: 0 0 0 3px rgba(6, 212, 57, 0.15);
+        }
+
+        .element_input::placeholder {
+            color: #71717a;
+        }
+
+        .button-contain button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #08b216 0%, #6df085 100%);
+            border: none;
+            border-radius: 8px;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: opacity 0.2s ease, transform 0.1s ease;
+            box-shadow: 0 4px 12px rgba(8, 145, 178, 0.3);
+        }
+
+        .button-contain button:hover {
+            opacity: 0.9;
+        }
+
+        .button-contain button:active {
+            transform: scale(0.98);
+        }
+
+        .result {
+            margin-top: 25px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            word-break: break-word;
+            padding: 14px 16px;
+            background-color: #fafafa;
+            border: 1px solid #ffffff;
+            border-radius: 8px;
+            border-left: 4px solid #71717a;
+            color: #71717a;
+            text-align: left;
+            min-height: 52px;
+            transition: all 0.3s ease;
+        }
+
+        .result:not(:empty) {
+            border-left-color: #41ff7a;
+            color: #f4f4f5;
+            animation: fadeIn 0.3s ease;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #18181b;
+            border-top: 1px solid #27272a;
+            padding: 12px 20px;
+            font-size: 0.8rem;
+            color: #a1a1aa;
+            letter-spacing: 0.5px;
+            text-align: center;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.4);
+            z-index: 100;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Planet Information</h1>
-        <p>Enter a planet code to search</p>
+        <div class="logo-wrapper">
+            <img src="EXAC.png" alt="EXAC Logo" class="logo-img">
+        </div>
 
-        <input type="text" id="planet1" placeholder="Example: Earth">
+        <h1>ELEMENT FINDER</h1>
+        <p>Periodic Table Information Finder</p>
+
+        <div>
+            <form onsubmit="return false;">
+                <div class="form-check">
+                    <div class="form-group">
+                        <input type="text" id="element1" class="element_input" placeholder="Element Symbol ONLY" required>
+                    </div>
+                </div>
+                
+                <div class="button-contain">
+                    <button type="button" py-click="check_element">CHECK ELEMENT</button>
+                </div>
+            </form>
+            <br><br>
+            <div class="result">
+                <h3>Search Result</h3>
+                <p><b>Symbol: <span id="symbol"> </span></b></p>
+                <p><b>Element: <span id="name"> </span></b></p>
+                <p><b>Atomic Number: <span id="number"> </span></b></p>
+                <p><b>Atomic Mass: <span id="mass"> </span></b></p>
+            </div>
+        </div>
     </div>
-        <br>
 
-        <button py-click="search_planet">Search Planet</button>
-
-        <div class="result"></div>
-        <h3>Search Result</h3>
-        <p><b>Planet code: <span id="code"> </span></b></p>
-        <p><b>Planet name: <span id="name"> </span></b></p>
-        <p><b>Order from the Sun: <span id="order"> </span></b></p>
-        <p><b>Number of moons: <span id="moons"> </span></b></p>
-
-        <script type="py" src="main.py"></script>
+    <footer>
+        &copy; 2026 ICT 2nd Quarter | Edrian Correa | 10 - Ruby AY26-27
+    </footer>
+    
+    <script type="py" src="main.py"></script>
 </body>
 </html>
