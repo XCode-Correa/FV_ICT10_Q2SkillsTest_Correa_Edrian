@@ -22,15 +22,15 @@ non_metals = {
     "OG": ("Oganesson", 118, "294")
 }
 
-# Function called by py-click="add_member" when the user clicks the button
+# Function py-click="add_member" when user clicks button
 def check_element(event):
-    # Retrieve and format the element symbol entered in the input field
+    # Retrieve & format element symbol entered in input for function
     Element1 = document.getElementById("element1").value.strip().upper()
 
-    # Search the non_metals dictionary or return default error values if not found
+    # Search non_metals dictionary or return default error if not found
     result = non_metals.get(Element1, ("Element not found in non-metals list", "-", "-"))
 
-    # Update the HTML elements with the retrieved information
+    # Update the HTML elements with retrieved info
     document.getElementById("symbol").innerText = Element1 if Element1 in non_metals else "-"
     document.getElementById("name").innerText = result[0]
     document.getElementById("number").innerText = result[1]
